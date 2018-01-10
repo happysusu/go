@@ -1,0 +1,49 @@
+
+#include<cstdio>
+#include<iostream>
+using namespace std;
+int day, month, t_month, year;
+int m[13];
+int ans= 2147480000;
+int calc(int s, int total)
+{
+	if (s >= 13)
+	{
+		if (total < ans)
+		{
+			ans = total;
+		}
+		return 0;
+	}
+	//1일이용권 이용
+	calc(s + 1, total + m[s] * day);
+	//1달이용권 이용
+	calc(s + 1, total + month);
+	//3달이용권이용
+	calc(s + 3, total + t_month);
+	//1년이용권이용
+	if (s == 1)
+	{
+		calc(s + 12, total+year);
+	}
+}
+int main()
+{
+	int T;
+	scanf("%d", &T);
+	for (int test_case = 1; test_case <= T; test_case++)
+	{
+		ans = 2147480000;
+		scanf("%d %d %d %d", &day, &month, &t_month, &year);
+		for (int i = 1; i <= 12; i++)
+		{
+			scanf("%d", &m[i]);
+		}
+
+		calc(1, 0);
+
+
+		printf("#%d %d\n", test_case, ans);
+	}
+	return 0;
+}
