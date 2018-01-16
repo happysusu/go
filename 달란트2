@@ -1,0 +1,27 @@
+#include<cstdio>
+#include<iostream>
+using namespace std;
+int n, p;
+int main()
+{
+	int t;
+	scanf("%d", &t);
+
+	for (int tc = 1; tc <= t; tc++)
+	{
+		long long ans = 1;
+
+		scanf("%d %d", &n, &p);
+		
+		while (n)
+		{
+			ans *= (n / p);
+			n -= n / p;
+			p--;
+		}
+
+		printf("#%d %lld\n", tc, ans);
+	}
+
+	return 0;
+}
